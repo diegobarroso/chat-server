@@ -4,10 +4,17 @@ import jwt_decode from "jwt-decode";
 
 
 function getToken(req, res, next) {
-    const token = req.header('token');
-    const decoded = jwt_decode(token);
-    const { user_name } = decoded.user_metadata;
-    
+    const action = req.header('action');
+    let user_name;
+
+    if (action === 'login') {
+        const token = req.header('token');
+        const decoded = jwt_decode(token);
+        user_name = decoded.user_metadata.user_name;
+    } else if (action === 'add') {
+        user_name = req.header('token');
+    }
+
     try {
 
         const AccessToken = twilio.jwt.AccessToken;

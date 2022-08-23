@@ -13,7 +13,7 @@ app.use(urlencoded({ extended: false }));
 app.use(cors({
     origin: corsClient.domain,
     credentials: true,
-    methods: ['GET'],
+    methods: ['GET', 'POST'],
     maxAge: 3600 * 1000,
 }));
 app.options('*', cors());
